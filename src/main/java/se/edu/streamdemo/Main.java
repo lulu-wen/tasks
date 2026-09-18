@@ -22,7 +22,11 @@ public class Main {
         System.out.println("Printing deadlines ...");
         printDeadlines(tasksData);
 
+        System.out.println("Printing deadlines using streams");
+        printDeadlineUsingStreams(tasksData);
+
         System.out.println("Total number of deadlines: " + countDeadlines(tasksData));
+        System.out.println("Total number of deadlines using streams: " + countDeadlinesUsingStream(tasksData));
 
     }
 
@@ -63,6 +67,18 @@ public class Main {
                 System.out.println(t);
             }
         }
+    }
+
+    public static void printDeadlineUsingStreams(ArrayList<Task> tasks) {
+        System.out.println("Using parallel stream ...");
+        tasks.parallelStream()
+                .filter(t -> t instanceof Deadline)
+                .forEach(System.out::println);
+
+        System.out.println("Using stream ...");
+        tasks.stream()
+                .filter(t -> t instanceof Deadline)
+                .forEach(System.out::println);
     }
 
 }
